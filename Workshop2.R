@@ -16,7 +16,7 @@ sum(arr * arr2)
 prod(arr) ^ (1 / length(arr2))
 
 
-# custom functions
+# custom functions ==========
 
 my.mean <- function(arr) {
   output <-  sum(arr) / length(arr)
@@ -38,9 +38,54 @@ my.harmonicMean2 <- function(arr) {
   output
 }
 
-# custom functions end
+# conditions
+my.arrayLength <- function(arr) {
+  if (length(arr) >= 10) {
+    "array is larger than 10"
+  }
+  else if (length(arr) >= 5) {
+    "array is larger than 5"
+  }
+  else {
+    "array is less than 5"
+  }
+}
+
+# custom functions end ===========
+
 mean(arr)
 my.mean(arr)
 my.geometricMean(arr)
 my.harmonicMean(arr)
 my.harmonicMean2(arr)
+
+
+my.harmonicMean(c(9, 13, 2))
+my.geometricMean(c(9, 13, 2))
+
+# rounding results
+x <- c(0.6, 0.9, 0.26, 0.7)
+round(my.geometricMean(x), 3)
+round(my.mean(x), 3)
+round(my.harmonicMean(x), 3)
+
+
+# misc
+table(arr)
+unique(c(1, 2, 3, 3))
+
+# conditions
+my.arrayLength(arr)
+my.arrayLength(c(1, 2, 3, 4))
+
+
+# For loop
+for (a in arr) {
+  print(a)
+}
+
+for (i in 1:11) {
+  print(arr[i])
+}
+arr[0]
+arr[1]
