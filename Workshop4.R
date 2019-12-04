@@ -94,10 +94,13 @@ hist(v,
 dev.off()
 
 # Line graphs
-yAxis <- c(7, 12, 28, 3, 41)
+yVals <- c(7, 12, 28, 3, 41)
+yVals2 <- c(14, 7, 6, 19, 13)
 png(filename = "Datasets/Outputs/line_graph.png")
-plot(yAxis, type = "o") # x will start from 1 by deafult
+plot(yVals, type = "o") # x will start from 1 by deafult
+lines(yVals2, type = "o", col = "blue")
 dev.off()
+
 
 ## Transforming variables
 volleyFilePath <- "Datasets/volley.txt"
