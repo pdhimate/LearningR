@@ -66,7 +66,6 @@ dev.off()
 colours <- c("green", "orange", "brown")
 months <- c("Mar", "Apr", "May", "Jun", "Jul")
 regions <- c("East", "West", "North")
-
 valsMatrix <-
   matrix(
     c(2, 9, 3, 11, 9, 4, 8, 7, 3, 12, 2, 8, 10, 11, 12),
@@ -74,7 +73,6 @@ valsMatrix <-
     ncol = 5,
     byrow = TRUE
   )
-
 png(filename = "Datasets/Outputs/bar_chart_stacked.png")
 barplot(
   valsMatrix,
@@ -87,8 +85,19 @@ barplot(
 dev.off()
 
 # plotting Histogram
+v <- c(9, 13, 21, 8, 36, 22, 12, 41, 31, 33, 19)
+png(filename = "Datasets/Outputs/histogram.png")
+hist(v,
+     xlab = "weight",
+     col = "red",
+     border = "black")
+dev.off()
 
-
+# Line graphs
+yAxis <- c(7, 12, 28, 3, 41)
+png(filename = "Datasets/Outputs/line_graph.png")
+plot(yAxis, type = "o") # x will start from 1 by deafult
+dev.off()
 
 ## Transforming variables
 volleyFilePath <- "Datasets/volley.txt"
@@ -111,3 +120,15 @@ volley
 
 # Use  the  linear  feature  scaling  technique  to  get  col2
 # and the remaining columns, 3 and 4, to range between 0 and 1
+
+# Sorting, Ranking
+a <- c(22, 1, 333, 55555, 4444)
+sort(a)
+rank(a) # ranks of the numbers in a
+rank(-a) # decreasing ranks of the numbers in a
+# ranking on volleys/sprint times
+volley[, 1] <- original[, 1]
+volley
+volley[, 1] <-
+  (length(volley[, 1] - rank(volley[, 1]))) / (length(volley[, 1] - 1)) # gets highest score
+volley
