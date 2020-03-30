@@ -65,7 +65,7 @@ barplot(
 dev.off()
 
 # stacked bar chart
-regions <- c("East", "West", "North") 
+regions <- c("East", "West", "North")
 colours <- c("green", "orange", "brown") # 1 color for each region
 months <- c("Mar", "Apr", "May", "Jun", "Jul")
 valsMatrix <-
@@ -84,16 +84,19 @@ barplot(
   ylab = "revenue",
   col = colours
 )
-legend("topleft",regions,cex=1,fill=colours) # displays legend on the previous plot
+legend("topleft", regions, cex = 1, fill = colours) # displays legend on the previous plot
 dev.off()
 
 # plotting Histogram (frequecy against numbers)
 v <- c(9, 13, 21, 8, 36, 22, 12, 41, 31, 33, 19)
 png(filename = "Datasets/Outputs/histogram.png")
-hist(x=v,
-     xlab = "weight",
-     col = "yellow",xlim = c(1,50),
-     border = "black")
+hist(
+  x = v,
+  xlab = "weight",
+  col = "yellow",
+  xlim = c(1, 50),
+  border = "black"
+)
 dev.off()
 
 # Line graphs
@@ -107,13 +110,14 @@ dev.off()
 # correlations : scatter plot
 weight <- c(2.62, 2.875, 2.320, 3.215, 3.44, 3.460)
 mileage <- c(21.0, 21, 22.8, 21.4, 18.7, 18.1)
-cor(weight,mileage) # calculates correlational points to be able to plot
+cor(weight, mileage) # calculates correlational points to be able to plot
 plot(
-  weight,  mileage,
+  weight,
+  mileage,
   xlab = "Weight of vehicle",
   ylab = "Mileage",
-  xlim = c(2,5),
-  ylim = c(10,30),
+  xlim = c(2, 5),
+  ylim = c(10, 30),
   main = "Weight VS Mileage"
 )
 
@@ -124,8 +128,9 @@ volley <- read.table(volleyFilePath)
 volley
 original <- volley
 
+# subtract each entry in col1 from 51.24
 volley[, 1] <-
-  51.24 - volley[, 1] # subtract each entry in col1 from 51.24
+  51.24 - volley[, 1]
 volley
 
 # apply unit transformation on col1
@@ -153,4 +158,21 @@ volley[, 1] <-
 volley
 
 
- 
+# power mean
+PM = function(x, p) {
+  if (p == 0) {
+    prod(x) ^ {
+      1 / length(x)
+    }
+  }
+  else{
+    mean(x ^ p) ^ {
+      1 / p
+    }
+  }
+}
+
+nums <- c(1, 2, 3, 4, 5)
+PM(nums, 1) # arithematic mean
+PM(nums, 0) # geometric mean
+PM(nums, -1) # harmonic mean
