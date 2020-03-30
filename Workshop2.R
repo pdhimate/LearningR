@@ -1,5 +1,22 @@
 arr <- 1:10
 
+# array with 20 elements each with 2
+arrTemp <- array(2,20)
+arrTemp
+
+# array with 12 elements, repeating sequence of 4,5,6
+array(c(4,5,6), 12) 
+array(c(1,2,3,5,6), 12) 
+
+# matrix with 1 row with 5 4s
+array(4,c(1,5))
+array(4,c(3,5)) # 3 rows with 5 4s
+
+length(table(c(1,2)))
+
+strsplit("string",split = "")
+c("s","t")
+
 # built in functions
 mean(arr)
 median(arr)
