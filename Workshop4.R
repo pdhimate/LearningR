@@ -176,3 +176,51 @@ nums <- c(1, 2, 3, 4, 5)
 PM(nums, 1) # arithematic mean
 PM(nums, 0) # geometric mean
 PM(nums, -1) # harmonic mean
+
+
+AM = function(x){
+  PM(x, 1)
+}
+
+GM = function(x){
+  PM(x, 0)
+}
+
+HM = function(x){
+  PM(x, -1)
+}
+
+# Verifying properties of means
+# 1. Symmetry : The order of the numbers doesn’t affect the output.
+set <- c(1,2,3,4,5)
+shuffledSet <- sample(set) # sample shuffles the vector 
+c("AM Symmetry : ",AM(set) == AM(shuffledSet))
+c("GM Symmetry : ",GM(set) == GM(shuffledSet))
+c("HM Symmetry : ",HM(set) == HM(shuffledSet))
+
+# 2. translation invariant - if we add a constant to every value 
+# and take the average, then the output will change by that same constant.
+set <- c(1,2,3,4,5)
+increasedSet <- set + 3  
+c("AM translation invariant : ",AM(set) + 3 == AM(increasedSet))
+c("GM translation invariant : ",GM(set) + 3 == GM(increasedSet))
+c("HM translation invariant : ",HM(set) + 3 == HM(increasedSet))
+
+# 3. homogeneous - if we multiply all values by a constant, 
+# the output will also change by the same factor.
+set <- c(1,2,3,4,5)
+increasedSet <- set * 5  
+c("AM translation invariant : ",AM(set) * 5 == AM(increasedSet))
+c("GM translation invariant : ",GM(set) * 5 == GM(increasedSet))
+c("HM translation invariant : ",HM(set) * 5 == HM(increasedSet))
+
+# 4. homogeneousidempotent - if all values are the same, 
+# then the output will also be the same value. 
+set <- c(2,2,2,2,2)
+c("AM translation invariant : ",AM(set) == 2)
+c("GM translation invariant : ",GM(set) == 2)
+c("HM translation invariant : ",HM(set) == 2)
+
+
+
+
