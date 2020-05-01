@@ -32,6 +32,13 @@ invScaleFunc <- function(x, minX, maxX) {
   return(result)
 }
 
+# Minkowski Distance to find closest actual Y for the target X values.
+# p=1 manhattan distance
+# p=2 euclidean distance
+minkowski <- function(x, y, p = 1)
+  (sum(abs(x - y) ^ p)) ^ (1 / p)
+
+
 # functions #########################
 
 # read all data
