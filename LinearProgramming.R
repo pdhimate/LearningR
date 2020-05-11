@@ -35,18 +35,16 @@ objvalue
 solution<-get.variables(lpModel)
 solution  
 
-
-
 ##### Toy Company - assembly line workstations ########
 
 library(lpSolveAPI)
 
 # model and objective
 lpModel <- make.lp(3, 2) # 3 constraints and 2 decision variables
-lp.control(lpModel, sense= "maximize") # max the profit
+lp.control(lpModel, sense= "maximize") # max
 
 # objective functions
-set.objfn(lpModel, c(12, 19)) # 2 decisions variables coeffients
+set.objfn(lpModel, c(-12, -19)) # 2 decisions variables coeffients
 
 # constraints LHS equations
 set.row(lpModel, 1, c(3,6), indices = c(1,2))
@@ -69,6 +67,69 @@ get.objective(lpModel)
 get.variables(lpModel)
 get.constraints(lpModel)
 
+##### Farmer Dave - decision ########
+
+library(lpSolveAPI)
+
+# model and objective
+lpModel <- make.lp(3, 2) # 3 constraints and 2 decision variables
+lp.control(lpModel, sense= "minimize") 
+
+# objective functions
+set.objfn(lpModel, c(10, 3)) # 2 decisions variables coeffients
+
+# constraints LHS equations
+set.row(lpModel, 1, c(3,2), indices = c(1,2))
+set.row(lpModel, 2, c(7,2), indices = c(1,2))
+set.row(lpModel, 3, c(3,6), indices = c(1,2))
+
+# constraints RHS values
+set.rhs(lpModel, c(60, 84, 72))
+set.constr.type(lpModel, c(">=",">=",	">="))
+
+# bounds
+set.type(lpModel, c(1:2),"real")
+set.bounds(lpModel, lower = rep(0, 2), upper = rep(Inf, 2))
+
+# write.lp(multiPeriodModel, filename="test.lp")  #Use write.lp to print out larger LPs. 
+lpModel
+solve(lpModel) 
+
+get.objective(lpModel)
+get.variables(lpModel)
+get.constraints(lpModel)
+
+##### Farmer Vicky -magic feed cost ########
+
+library(lpSolveAPI)
+
+# model and objective
+lpModel <- make.lp(3, 2) # 3 constraints and 2 decision variables
+lp.control(lpModel, sense= "minimize") 
+
+# objective functions
+set.objfn(lpModel, c(0.3, 0.9)) # 2 decisions variables coeffients
+
+# constraints LHS equations
+set.row(lpModel, 1, c(1,1), indices = c(1,2))
+set.row(lpModel, 2, c(0.21,-0.3), indices = c(1,2))
+set.row(lpModel, 3, c(0.03,-0.01), indices = c(1,2))
+
+# constraints RHS values
+set.rhs(lpModel, c(800, 0, 0))
+set.constr.type(lpModel, c(">=","<=",	">="))
+
+# bounds
+set.type(lpModel, c(1:2),"real")
+set.bounds(lpModel, lower = rep(0, 2), upper = rep(Inf, 2))
+
+# write.lp(multiPeriodModel, filename="test.lp")  #Use write.lp to print out larger LPs. 
+lpModel
+solve(lpModel) 
+
+get.objective(lpModel)
+get.variables(lpModel)
+get.constraints(lpModel)
 
 
 
