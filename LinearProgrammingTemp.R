@@ -226,12 +226,12 @@ lpModel <- make.lp(4,2) # 4 constraints and 2 decision variables
 lp.control(lpModel, sense = "minimize") 
 
 # objective functions
-set.objfn(lpModel, c(500, 600)) # 2 decisions variables coeffients
+set.objfn(lpModel, c(5, 6)) # 2 decisions variables coeffients
 
 # constraints LHS equations
-set.row(lpModel, 1, c(6,4), indices = c(1,2))
-set.row(lpModel, 2, c(4,6), indices = c(1,2))
-set.row(lpModel, 3, c(3,8), indices = c(1,2))
+set.row(lpModel, 1, c(.06,.04), indices = c(1,2))
+set.row(lpModel, 2, c(.04,.06), indices = c(1,2))
+set.row(lpModel, 3, c(.03,.08), indices = c(1,2))
 set.row(lpModel, 4, c(1,1), indices = c(1,2))
 
 # constraints RHS values
