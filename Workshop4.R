@@ -214,7 +214,17 @@ c("AM translation invariant : ",AM(set) * 5 == AM(increasedSet))
 c("GM translation invariant : ",GM(set) * 5 == GM(increasedSet))
 c("HM translation invariant : ",HM(set) * 5 == HM(increasedSet))
 
-# 4. homogeneousidempotent - if all values are the same, 
+
+# 4. monotone increasing - if we increas 1 value or more, 
+# then the output will also be the more than previous mean 
+set <- c(1,2,3)
+set2 <- c(2,2,3)
+c("AM monotone increasing : ",AM(set) < AM(set2))
+c("GM monotone increasing : ",GM(set) < GM(set2))
+c("HM monotone increasing : ",HM(set) < HM(set2))
+
+
+# 5. idempotent - if all values are the same, 
 # then the output will also be the same value. 
 set <- c(2,2,2,2,2)
 c("AM translation invariant : ",AM(set) == 2)
