@@ -92,6 +92,10 @@ choquet <- function(x,v) {   						# 1. pre-defining the inputs (no default)
 }
 
 
+#------ minkowski distance function  ------#
+minkowski <- function(x, y, p = 1)
+  (sum(abs(x - y) ^ p)) ^ (1 / p)
+
 
 #############################
 # PLOTTING FUNCTIONS #
