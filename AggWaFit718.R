@@ -99,6 +99,20 @@ orness.OWA = function(w) { # input weight vector
   sum(w*(1:n-1)/(n-1))
 }
 
+#---------- SSE and SAE and other error measures-----------#
+sse <- function(a,b){
+ sum((a-b)^2)
+}
+sae <- function(a,b){
+  sum(abs(a-b))
+}
+mae<-function(a,b){
+  sum(abs(a-b))/length(a)
+}
+rmse <- function(a,b){
+  sqrt(sum((a-b)^2)/length(a))
+}
+
 #------ minkowski distance function  ------#
 minkowski <- function(x, y, p = 1)
   (sum(abs(x - y) ^ p)) ^ (1 / p)

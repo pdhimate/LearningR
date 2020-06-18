@@ -58,21 +58,43 @@ orness.OWA(w) # = 0.35 indicating the OWA function tends towards lower inputs.
 #######################
 x <- c(0.8,0.3,.4)
 # v(1), v(2),v(2,1), v(3),v(3,1),v(3,2),v(3,2,1)
-v <- c(.4, .1,.6, .1,.6,.9,1) 
-choquet(x,v)
+w <- c(.4, .1,.6, .1,.6,.9,1) 
+choquet(x,w)
 
 # v(1), v(2),v(2,1), v(3),v(3,1),v(3,2),v(3,2,1)
-v <- c(.45, .45,.5, .3,.9,.9,1) 
+w <- c(.45, .45,.5, .3,.9,.9,1) 
 sachin <- c(18,16,10)
 courtney <- c(10,12,18)
 wasim <- c(14,15,15)
-choquet(sachin,v)
-choquet(courtney,v)
-choquet(wasim,v)
-
+choquet(sachin,w)
+choquet(courtney,w)
+choquet(wasim,w)
 
 #######################
+# Error measures
 #######################
+
+a <- c(90, 40, 69, 31, 39, 44, 21, 81, 25, 52)
+b <- c(64, 42, 65, 4, 55, 42, 18, 79, 46, 62)
+
+# SSE : Sum of Squared Error
+sse(a,b)
+
+# SAE: Sum of Absolute Errors 
+sae(a,b)
+
+# Average Absolute Error
+mae(a,b)
+
+# RMSE
+rmse(a,b)
+
+# Pearson Correlation
+cor(a,b)
+
+# Spearman Correlation
+cor(a,b,method="spearman")
+
 
 #######################
 #######################
