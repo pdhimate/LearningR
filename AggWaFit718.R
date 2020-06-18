@@ -93,13 +93,18 @@ choquet <- function(x,v) {   						# 1. pre-defining the inputs (no default)
   sum(w*x)                     						# 6. calculate as we would WAM
 }
 
+#------ Orness of OWA fucntion ----------#
+orness.OWA = function(w) { # input weight vector
+  n = length(w)
+  sum(w*(1:n-1)/(n-1))
+}
 
 #------ minkowski distance function  ------#
 minkowski <- function(x, y, p = 1)
   (sum(abs(x - y) ^ p)) ^ (1 / p)
 
 #------ranged scaling function ------#
-# sclaes to specified non-unit interval, range
+# scales to specified non-unit interval, range
 scaleFunc <- function(x, minX, maxX) {
   result <- x
   result <- x * (maxX - minX) + minX 

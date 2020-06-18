@@ -47,7 +47,11 @@ scaleFunc(a, 100, 200)
 polyFunc(a, 0.5)
 
 #######################
+# Orness
 #######################
+
+w <- c(.2,.1,.3)
+orness.OWA(w) # = 0.35 indicating the OWA function tends towards lower inputs.
 
 #######################
 #######################
