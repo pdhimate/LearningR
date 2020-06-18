@@ -96,6 +96,28 @@ choquet <- function(x,v) {   						# 1. pre-defining the inputs (no default)
 minkowski <- function(x, y, p = 1)
   (sum(abs(x - y) ^ p)) ^ (1 / p)
 
+#------ranged scaling function ------#
+# sclaes to specified non-unit interval, range
+scaleFunc <- function(x, minX, maxX) {
+  result <- x
+  result <- x * (maxX - minX) + minX 
+  return(result)
+}
+
+# scaling to unit interval
+unitscaleFunc <- function(x) {
+  result <- x
+  result <- (result - min(result)) / (max(result) - min(result)) 
+  return(result)
+}
+
+# polynomial transformation func
+polyFunc <- function(x, p) {
+  result <- x
+  result <- result ^ p # polynomial transformation
+  return(result)
+}
+
 
 #############################
 # PLOTTING FUNCTIONS #
