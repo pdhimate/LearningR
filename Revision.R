@@ -12,6 +12,18 @@ PM(a, p = 0) # Geometric mean
 PM(a, p = 1) # Arithematic mean
 PM(a, p = Inf) # approaches maximum function
 
+# Weighted Power Mean
+a <- c(0.7, 0.20, 0.5)
+w <- c(0.2, 0.25, 0.55)
+PM(a, w,-2) # p=-2
+PM(c(0.1, .2, .5, .2), c(.5, .3, .1, .1), 0) # weighted geometric mean, p=0
+PM(c(.1, .9, .3, .2), c(.3, .6, .05, .05), 1) # weighted arithematic mean, p=1
+
+# Ordered weighted Average : OWA
+a <- c(.2, .3, .1, .9)
+w <- c(7 / 16, 5 / 16, 3 / 16, 1 / 16)
+OWA(a, w)
+
 #######################
 # Minkowski distances
 #######################

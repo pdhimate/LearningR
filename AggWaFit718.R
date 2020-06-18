@@ -34,6 +34,8 @@ PM2 <- function(x) {x^2}
 invPM2 <-function(x) {x^(1/2)}
 PM05 <- function(x) {x^0.5}
 invPM05 <-function(x) {x^(1/0.5)}
+PM5 <- function(x) {x^5}
+invPM5 <-function(x) {x^(1/5)}
 HM <- function(x) {x^(-1)}
 invHM <- function(x) {x^(-1)}
 
