@@ -84,13 +84,98 @@ cor(a,b)# Pearson Correlation
 cor(a,b,method="spearman")# Spearman Correlation
 
 #######################
+# linear programming
 #######################
 
-#######################
-#######################
+## Toy Company: Solider and train
+library(lpSolveAPI)
+
+# model and objective
+lpModel <- make.lp(3, 2) # 3 constraints and 2 decision variables
+lp.control(lpModel, sense = "maximize") # max the profit
+
+# objective functions
+set.objfn(lpModel, c(3, 2)) # 2 decisions variables coeffients
+
+# constraints LHS equations
+set.row(lpModel, 1, c(2,1), indices = c(1,2))
+set.row(lpModel, 2, c(1,1), indices = c(1,2))
+set.row(lpModel, 3, c(1), indices = c(1))
+
+# constraints RHS values
+set.rhs(lpModel, c(100, 80, 40))
+set.constr.type(lpModel, c("<=",	"<=",	">="))
+
+# bounds
+set.type(lpModel, c(1:2), "real")
+set.bounds(lpModel, lower = rep(0, 2), upper = rep(Inf, 2))
+
+# write.lp(multiPeriodModel, filename="test.lp")  #Use write.lp to print out larger LPs.
+lpModel
+solve(lpModel)
+get.objective(lpModel)
+get.variables(lpModel)
+
+
+## Toy company assembly line 3 workstations, trains and soilders
+library(lpSolveAPI)
+
+# model and objective
+lpModel <- make.lp(3, 2) # 3 constraints and 2 decision variables
+lp.control(lpModel, sense = "minimize") # min idle time of workstations
+
+# objective functions
+set.objfn(lpModel, c(-12, -19)) # 2 decisions variables coeffients
+
+# constraints LHS equations
+set.row(lpModel, 1, c(3,6), indices = c(1,2))
+set.row(lpModel, 2, c(5,5), indices = c(1,2))
+set.row(lpModel, 3, c(4,8), indices = c(1,2))
+
+# constraints RHS values
+set.rhs(lpModel, c(540, 450, 480))
+set.constr.type(lpModel, c("<=",	"<=",	"<="))
+
+# bounds
+set.type(lpModel, c(1:2), "real")
+set.bounds(lpModel, lower = rep(0, 2), upper = rep(Inf, 2))
+
+# write.lp(multiPeriodModel, filename="test.lp")  #Use write.lp to print out larger LPs.
+lpModel
+solve(lpModel)
+get.objective(lpModel)
+get.variables(lpModel)
+
+
+
+# Farmer dave decision of buying feed 1 and feed 2 for nutrients A,B,C
+
+# model and objective
+lpModel <- make.lp(3, 2) # 3 constraints and 2 decision variables
+lp.control(lpModel, sense = "minimize") # min cost of feed
+
+# objective functions
+set.objfn(lpModel, c(10, 3)) # 2 decisions variables coeffients
+
+# constraints LHS equations
+set.row(lpModel, 1, c(3,2), indices = c(1,2))
+set.row(lpModel, 2, c(7,2), indices = c(1,2))
+set.row(lpModel, 3, c(3,6), indices = c(1,2))
+
+# constraints RHS values
+set.rhs(lpModel, c(60, 84, 72))
+set.constr.type(lpModel, c(">=",	">=",	">="))
+
+# bounds
+set.type(lpModel, c(1:2), "real")
+set.bounds(lpModel, lower = rep(0, 2), upper = rep(Inf, 2))
+
+# write.lp(multiPeriodModel, filename="test.lp")  #Use write.lp to print out larger LPs.
+lpModel
+solve(lpModel)
+get.objective(lpModel)
+get.variables(lpModel)
 
 #######################
-#######################
-
-#######################
+# Game theory
 #######################
