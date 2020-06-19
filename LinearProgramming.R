@@ -145,7 +145,7 @@ set.objfn(lpModel, c(0.06497, 0.011468, 0.014814, 0.06875, 0.0505)) # 5 decision
 set.row(lpModel, 1, rep(1, 5), indices = c(1:5))
 set.row(lpModel, 2, c(-0.04, -0.04,-0.04, 0.6, 0.6), indices = c(1:5))
 set.row(lpModel, 3, c(-0.5, -0.5, 0.5), indices = c(1, 2, 3))
-set.row(lpModel, 4, c(0.06, 0.03,-0.01,-0.01, 0.005), indices = c(1:5))
+set.row(lpModel, 4, c(0.06, 0.03,-0.01, 0.01, 0.005), indices = c(1:5))
 
 # constraints RHS values
 set.rhs(lpModel, c(12, 0, 0, 0))
