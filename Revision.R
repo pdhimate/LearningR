@@ -236,7 +236,80 @@ get.constraints(lpModel)
 
 
 
+## Supply = demand  electricity 4 cities 3 plants
 
+# model and objective
+lpModel <- make.lp(7, 12) # 7 constraints and 12 decision variables
+lp.control(lpModel, sense = "minimize")
+
+# objective functions
+set.objfn(lpModel, c(8,6,10,9,9,12,13,7,14,9,16,5)) # 12 decisions variables coeffients
+
+# constraints LHS equations
+set.row(lpModel, 1, rep(1, 4), indices = c(1:4))
+set.row(lpModel, 2, rep(1, 4), indices = c(5:8))
+set.row(lpModel, 3, rep(1, 4), indices = c(9:12))
+set.row(lpModel, 4, c(1,1,1), indices = c(1,5,9))
+set.row(lpModel, 5, c(1,1,1), indices = c(2,6,10))
+set.row(lpModel, 6, c(1,1,1), indices = c(3,7,11))
+set.row(lpModel, 7, c(1,1,1), indices = c(4,8,12))
+
+# constraints RHS values
+set.rhs(lpModel, c(72,50,78,45,70,30,55))
+set.constr.type(lpModel, c("<=", "<=",	"<=", ">=", ">=", ">=", ">="))
+
+# bounds
+set.type(lpModel, c(1:12), "real")
+set.bounds(lpModel, lower = rep(0, 12), upper = rep(Inf, 12))
+
+# write.lp(multiPeriodModel, filename="test.lp")  #Use write.lp to print out larger LPs.
+lpModel
+solve(lpModel)
+
+get.objective(lpModel)
+get.variables(lpModel)
+get.constraints(lpModel)
+
+
+## Supply = demand  cello 4 quaters with overtime and storage costs
+
+# model and objective
+lpModel <- make.lp(12, 12) # 12 constraints and 12 decision variables
+lp.control(lpModel, sense = "minimize") # min cost of prod plus storage and overtime
+
+# objective functions
+set.objfn(lpModel, c(400,400,400,400,450,450,450,450,20,20,20,20)) # 12 decisions variables coeffients
+
+# constraints LHS equations
+set.row(lpModel, 1, c(1,1,-1), indices = c(1,5,9))
+set.row(lpModel, 2, c(1,1,1,-1), indices = c(2,6,9,10))
+set.row(lpModel, 3, c(1,1,1,-1), indices = c(3,7,10,11))
+set.row(lpModel, 4, c(1,1,1), indices = c(4,8,11))
+set.row(lpModel, 5, c(1), indices = c(1))
+set.row(lpModel, 6, c(1), indices = c(2))
+set.row(lpModel, 7, c(1), indices = c(3))
+set.row(lpModel, 8, c(1), indices = c(4))
+set.row(lpModel, 9, c(1), indices = c(5))
+set.row(lpModel, 10, c(1), indices = c(6))
+set.row(lpModel, 11, c(1), indices = c(7))
+set.row(lpModel, 12, c(1), indices = c(8))
+
+# constraints RHS values
+set.rhs(lpModel, c(30,60,75,25,40,40,40,40,150,150,150,150))
+set.constr.type(lpModel, c("=", "=",	"=", "=", "<=", "<=", "<=", "<=", "<=", "<=", "<=", "<="))
+
+# bounds
+set.type(lpModel, c(1:12), "real")
+set.bounds(lpModel, lower = rep(0, 12), upper = rep(Inf, 12))
+
+# write.lp(multiPeriodModel, filename="test.lp")  #Use write.lp to print out larger LPs.
+lpModel
+solve(lpModel)
+
+get.objective(lpModel)
+get.variables(lpModel)
+get.constraints(lpModel)
+# not sure about correctness of answer
 
 
 
