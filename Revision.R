@@ -37,7 +37,6 @@ b <- c(1, 2, 3, 4)
 minkowski(a, b, 2) # p=2, euclidean distance
 minkowski(a, b) # p=1, manhattan distance
 
-
 #######################
 # Transformation or scaling
 #######################
@@ -77,24 +76,12 @@ choquet(wasim,w)
 a <- c(90, 40, 69, 31, 39, 44, 21, 81, 25, 52)
 b <- c(64, 42, 65, 4, 55, 42, 18, 79, 46, 62)
 
-# SSE : Sum of Squared Error
-sse(a,b)
-
-# SAE: Sum of Absolute Errors 
-sae(a,b)
-
-# Average Absolute Error
-mae(a,b)
-
-# RMSE
-rmse(a,b)
-
-# Pearson Correlation
-cor(a,b)
-
-# Spearman Correlation
-cor(a,b,method="spearman")
-
+sse(a,b) # SSE : Sum of Squared Error
+sae(a,b)# SAE: Sum of Absolute Errors 
+mae(a,b)# Average Absolute Error
+rmse(a,b)# RMSE
+cor(a,b)# Pearson Correlation
+cor(a,b,method="spearman")# Spearman Correlation
 
 #######################
 #######################
