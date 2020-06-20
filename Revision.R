@@ -5,23 +5,27 @@ source("AggWaFit718.R")
 # Power mean
 #######################
 
-a <- c(9, 10, 17, 16)
+a <- c(11,5,1,11,76,42,11,26,23,18)
+sort(a)
+median(a)
 PM(a, p = -Inf) # approaches minimum function
 PM(a, p = -1) # Harmonic mean
 PM(a, p = 0) # Geometric mean
 PM(a, p = 1) # Arithematic mean
 PM(a, p = Inf) # approaches maximum function
+skewness(a)
+skewness(polyFunc(a,0.5))
 
 # Weighted Power Mean
-a <- c(0.7, 0.20, 0.5)
-w <- c(0.2, 0.25, 0.55)
+w <- c(0.4, 0.3, 0.2, 0.1)
+a <- c(3,3,7,7)
 PM(a, w, -2) # p=-2
 PM(c(0.1, .2, .5, .2), c(.5, .3, .1, .1), 0) # weighted geometric mean, p=0
-PM(c(.1, .9, .3, .2), c(.3, .6, .05, .05), 1) # weighted arithematic mean, p=1
+PM(a,w, 1) # weighted arithematic mean, p=1
 
 # Ordered weighted Average : OWA
-a <- c(.2, .3, .1, .9)
-w <- c(7 / 16, 5 / 16, 3 / 16, 1 / 16)
+w <- c(0.4, 0.3, 0.2, 0.1)
+a <- c(8,7,6,4)
 OWA(a, w)
 
 # Standard Deviation
@@ -32,8 +36,8 @@ sd(a)
 # Minkowski distances
 #######################
 
-a <- c(9, 10, 17, 16)
-b <- c(1, 2, 3, 4)
+a <- c(1.0, 2.21, 0.4)
+b <- c(0.3,0.18,-0.11)
 minkowski(a, b, 2) # p=2, euclidean distance
 minkowski(a, b) # p=1, manhattan distance
 
@@ -55,9 +59,9 @@ orness.OWA(w) # = 0.35 indicating the OWA function tends towards lower inputs.
 #######################
 # Choquet
 #######################
-x <- c(0.8, 0.3, .4)
+x <- c(0.75, 0.45, .19)
 # v(1), v(2),v(2,1), v(3),v(3,1),v(3,2),v(3,2,1)
-w <- c(.4, .1, .6, .1, .6, .9, 1)
+w <- c(.0, .0, .8, .3, .8, .7, 1)
 choquet(x, w)
 
 # v(1), v(2),v(2,1), v(3),v(3,1),v(3,2),v(3,2,1)
@@ -310,6 +314,57 @@ get.objective(lpModel)
 get.variables(lpModel)
 get.constraints(lpModel)
 # not sure about correctness of answer
+
+
+## Inventory probelm projected and solved as a Supply = demand  
+# 4 quarter production and 4 quarter supply, excess storage cost, excees prodsupply costs 
+# and dummy demand point to absord excess supply
+# and initial 10 suppli at q1 available at no production cost
+
+# model and objective
+lpModel <- make.lp(14, 45) # 14 constraints and 5x9 decision variables
+lp.control(lpModel, sense = "minimize")
+m <- 99999 # very large cost of supplying from Q2 to Q1 which will prevent solver from considering it feasible
+# objective functions
+set.objfn(lpModel, c(0,20,40,60, 0, 
+                     400,420,440,460,0, 450,470,490,510, 0,
+                     m,400,420,440,0, m,450,470,490, 0,
+                     m,m,400,420,0, m,m,450,470, 0,
+                     m,m,m,400,0, m,m,m,450, 0)) # 45 decisions variables coeffients 0 for dummy demand point
+
+# constraints LHS equations
+set.row(lpModel, 1, rep(1, 5), indices = c(1:5))
+set.row(lpModel, 2, rep(1, 5), indices = c(6:10))
+set.row(lpModel, 3, rep(1, 5), indices = c(11:15))
+set.row(lpModel, 4, rep(1, 5), indices = c(16:20))
+set.row(lpModel, 5, rep(1, 5), indices = c(21:25))
+set.row(lpModel, 6, rep(1, 5), indices = c(26:30))
+set.row(lpModel, 7, rep(1, 5), indices = c(31:35))
+set.row(lpModel, 8, rep(1, 5), indices = c(36:40))
+set.row(lpModel, 9, rep(1, 5), indices = c(41:45))
+#  demAND
+set.row(lpModel, 10, rep(1,9), indices = c(1,6,11,16,21,26,31,36,41))
+set.row(lpModel, 11, rep(1,9), indices = c(2,7,12,17,22,27,32,37,42))
+set.row(lpModel, 12, rep(1,9), indices = c(3,8,13,18,23,28,33,38,43))
+set.row(lpModel, 13, rep(1,9), indices = c(4,9,14,19,24,29,34,39,44))
+set.row(lpModel, 14, rep(1,9), indices = c(5,10,15,20,25,30,35,40,45))
+
+# constraints RHS values
+set.rhs(lpModel, c(10,40,150,40,450,40,150,40,150, 40,60,75,25,570))
+set.constr.type(lpModel, c("<=","<=","<=","<=","<=","<=","<=","<=","<=", ">=",">=", ">=",">=",">="))
+
+# bounds
+set.type(lpModel, c(1:45), "real")
+set.bounds(lpModel, lower = rep(0, 45), upper = rep(Inf, 45))
+
+# write.lp(multiPeriodModel, filename="test.lp")  #Use write.lp to print out larger LPs.
+lpModel
+solve(lpModel)
+
+get.objective(lpModel)
+get.variables(lpModel)
+get.constraints(lpModel)
+
 
 
 
